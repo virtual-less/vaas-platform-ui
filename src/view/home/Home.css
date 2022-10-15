@@ -1,0 +1,12 @@
+.body {
+    height: 100vh;
+}
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}
