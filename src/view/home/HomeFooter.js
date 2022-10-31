@@ -2,7 +2,7 @@
 export default function HomeFooter() {
     return (
         <div>
-            Footer
+            {/* Footer */}
         </div>
     )
 }

@@ -1,20 +1,30 @@
 import './SelectApp.css'
 import { Select, Button} from 'antd';
-import {useState} from 'react';
+import {useState, useEffect, useContext} from 'react';
+import { getApi } from '../../api';
+import {AppContext} from '../../context/app';
 const { Option } = Select;
 
 
-export default function SelectApp(){
+export default function SelectApp(props){
     const [appData,setAppData] = useState(null)
-    const handleChangeApp = (value)=>{
-        setAppData(value)
+    const {appName,setAppName} = useContext(AppContext)
+    
+    useEffect(()=>{
+        setAppData(appName)
+    },[appName])
+    const handleChangeApp = (appName)=>{
+        setAppData(appName)
+        setAppName(appName)
     }
-    const appOptionList = [
-        {
-            appName:'test',
-            description:'测试App'
+    const [appOptionList, setAppOptionList] = useState([])
+    useEffect(()=>{
+        async function getData() {
+            const getAllAppListJSON = await getApi('/platform/getAllAppList')
+            setAppOptionList(getAllAppListJSON.data)
         }
-    ]
+        getData()
+    },[])
     const filterAppOptionList = (input, option) => {
         return option.value.includes(input) || option.label.includes(input)
     }
@@ -38,7 +48,7 @@ export default function SelectApp(){
                             label={appOption.description}
                         >
                         <div>
-                            {appOption.description}
+                        {appOption.appName}({appOption.description})
                         </div>
                     </Option>)
                     })
@@ -46,7 +56,7 @@ export default function SelectApp(){
                 </Select> 
             </div>
             <div>
-                <Button type="link">
+                <Button type="link" onClick={props.createAppEvent}>
                     创建新APP
                 </Button>
             </div>
