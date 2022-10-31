@@ -1,13 +1,10 @@
 import Icon from './icon.png';
 import SelectApp from '../../components/SelectApp/index'
-import { useContext } from 'react'
-import {AppContext} from '../../context/app';
-export default function HomeHeader() {
-    const {setAppName} = useContext(AppContext)
-    const createAppEventHandle = () => {
-        setAppName('')
-    };
+import { useNavigate } from "react-router-dom";
+import {Button } from 'antd';
 
+export default function HomeHeader() {
+    const navigate = useNavigate()
     return (
         <div className='flex-space-between'>
             <div>
@@ -16,9 +13,13 @@ export default function HomeHeader() {
                 alt="" width="30" height="30" 
                 />
                 Virtual as a Service Platform
+                &nbsp;&nbsp;&nbsp;
+                <Button onClick={()=>{navigate('/appConfig')}} >APP配置</Button>
+                &nbsp;&nbsp;&nbsp;
+                <Button onClick={()=>{navigate('/hostConfig')}} >域名配置</Button>
             </div>
             <div>
-            <SelectApp createAppEvent={createAppEventHandle} />
+            <SelectApp />
             </div>
         </div>
     )

@@ -22,7 +22,6 @@ export default function AppForm(){
         return {
             appName: '',
             description: '',
-            hostListText:'',
             allowModuleSet:['*'],
             maxWorkerNum:2,
             timeout:3000,
@@ -36,7 +35,6 @@ export default function AppForm(){
         return {
             appName: formData.appName,
             description: formData.description,
-            hostList: formData.hostListText?formData.hostListText.split(/\s+/):[],
             maxWorkerNum:formData.maxWorkerNum,
             allowModuleSet:formData.allowModuleSet,
             timeout:formData.timeout,
@@ -52,7 +50,6 @@ export default function AppForm(){
         const formData = {
             appName: serverData.appName,
             description: serverData.description,
-            hostListText:serverData.hostList.join('\r\n'),
             allowModuleSet:serverData?.appConfig?.allowModuleSet,
             maxWorkerNum:serverData?.appConfig?.maxWorkerNum,
             timeout:serverData?.appConfig?.timeout,
@@ -122,15 +119,6 @@ export default function AppForm(){
                 <Input.TextArea  rows={5}/>
             </Form.Item>
             <Divider orientation="left">以下为app偏好设置(非必填)</Divider>
-            <Form.Item
-                label="域名转发到当前App(多个域名请换行输入)"
-                name="hostListText"
-                rules={[
-                    { max:'1024', message: '描述最多支持1024个字符输入!' }
-                ]}
-            >
-                <Input.TextArea  rows={3} placeholder="一行一个域名，多个域名请换行"/>
-            </Form.Item>
             <Form.Item
                 label="可被允许调用系统模块(一般用于权限控制)"
                 name="allowModuleSet"
