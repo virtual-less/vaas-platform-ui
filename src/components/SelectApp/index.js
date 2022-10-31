@@ -1,7 +1,7 @@
 import './SelectApp.css'
-import { Select, Button} from 'antd';
+import { Select, Button, message} from 'antd';
 import {useState, useEffect, useContext} from 'react';
-import { getApi } from '../../api';
+import { getApi, deleteApi } from '../../api';
 import {AppContext} from '../../context/app';
 const { Option } = Select;
 
@@ -31,6 +31,14 @@ export default function SelectApp(props){
         }
         setAppName('')
     }
+    const deleteApp = async ()=>{
+        const deleteAppConfigSON = await deleteApi(`/platform/deleteAppConfig/${appName}`)
+        if(deleteAppConfigSON.errmsg) {
+            return message.error(deleteAppConfigSON.errmsg)
+        }
+        setAppName('')
+        message.success(`删除(${appName})成功`)
+    }
     const filterAppOptionList = (input, option) => {
         return option.value.includes(input) || option.label.includes(input)
     }
@@ -51,7 +59,7 @@ export default function SelectApp(props){
                         return (<Option 
                             key={appOption.appName} 
                             value={appOption.appName} 
-                            label={appOption.description}
+                            label={`${appOption.appName}(${appOption.description})`}
                         >
                         <div>
                         {appOption.appName}({appOption.description})
@@ -65,6 +73,13 @@ export default function SelectApp(props){
                 <Button type="link" onClick={clearAppEventHandle}>
                     {props.clearAppText || '清除当前App选择'}
                 </Button>
+                {
+                    appName && 
+                    <Button type="link" onClick={deleteApp} danger>
+                        删除APP
+                    </Button>
+                }
+                
             </div>
         </div>
     )
