@@ -25,6 +25,12 @@ export default function SelectApp(props){
         }
         getData()
     },[])
+    const clearAppEventHandle = ()=> {
+        if(props.clearAppEvent) {
+            props.clearAppEvent()
+        }
+        setAppName('')
+    }
     const filterAppOptionList = (input, option) => {
         return option.value.includes(input) || option.label.includes(input)
     }
@@ -56,8 +62,8 @@ export default function SelectApp(props){
                 </Select> 
             </div>
             <div>
-                <Button type="link" onClick={props.createAppEvent}>
-                    创建新APP
+                <Button type="link" onClick={clearAppEventHandle}>
+                    {props.clearAppText || '清除当前App选择'}
                 </Button>
             </div>
         </div>
