@@ -26,6 +26,7 @@ export default function AppConfig() {
     return (
         <div>
             <Modal title="请选择App" 
+            width="550px"
             open={selectAppModelOpen}
             onOk={selectAppModelHandleOk}
             okText="完成"
