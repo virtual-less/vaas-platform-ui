@@ -32,19 +32,22 @@ export default function HostConfig() {
         await getData()
     }
     const deleteHostData = async (hostData)=>{
-        hostList.splice(hostList.indexOf(hostData),1)
-        sethostList([...hostList])
-        await getData()
+        if(hostData.host) {
+            await getData()
+        } else {
+            hostList.splice(hostList.indexOf(hostData),1)
+            sethostList([...hostList])
+        }
     }
     
 
     return (
         <div>
             {
-                hostList.map((hostData,hostDataIndex)=>{
+                hostList.map((hostData)=>{
                     return (
                         <OneHostConfig 
-                        key={hostDataIndex}
+                        key={hostData.host}
                         hostData={hostData}
                         appOptionList={appOptionList}
                         onUpdate={()=>{updateHostData(hostData)}}
