@@ -6,7 +6,7 @@ import {Button } from 'antd';
 export default function HomeHeader() {
     const navigate = useNavigate()
     return (
-        <div className='flex-space-between'>
+        <div className='flex-space-between min-width-1024'>
             <div>
                 <img 
                 src={Icon} 

@@ -3,6 +3,9 @@
     display: flex;
     justify-content: space-between;
 }
+.min-width-1024 {
+    min-width: 1024px;
+}
 
 .flex-center {
     display: flex;
