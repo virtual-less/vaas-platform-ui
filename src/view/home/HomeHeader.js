@@ -17,6 +17,8 @@ export default function HomeHeader() {
                 <Button onClick={()=>{navigate('/appConfig')}} >APP配置</Button>
                 &nbsp;&nbsp;&nbsp;
                 <Button onClick={()=>{navigate('/hostConfig')}} >域名配置</Button>
+                &nbsp;&nbsp;&nbsp;
+                <Button onClick={()=>{navigate('/byPassConfig')}} >分流配置</Button>
             </div>
             <div>
             <SelectApp />
